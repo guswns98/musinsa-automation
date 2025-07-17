@@ -126,9 +126,10 @@ password_input.send_keys("test125")
 
 driver.find_element("xpath", '//android.widget.Button[@text="로그인"]').click()
 time.sleep(3)
+save_screenshot(driver, "login_fail")
 driver.find_element("id", 'android:id/button1').click()
 time.sleep(3)
-save_screenshot(driver, "login_fail")
+
 
 
 # 회원 가입
