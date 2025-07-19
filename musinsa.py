@@ -149,6 +149,7 @@ item = WebDriverWait(driver, 10).until(
 )
 time.sleep(5)
 item.click()
+time.sleep(2)
 save_screenshot(driver, "search_item_detail")
 
 like_button = WebDriverWait(driver, 10).until(
