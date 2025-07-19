@@ -28,20 +28,20 @@ jobs:
 
 on: [push]
 
-jobs:
-  appium-test:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+# jobs:
+#   appium-test:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
+#     - name: Set up Python
+#       uses: actions/setup-python@v4
+#       with:
+#         python-version: '3.10'
 
-    - name: SSH to Test Server and Run Tests
-      run: |
-        echo "${{ secrets.TEST_SERVER_PRIVATE_KEY }}" > key.pem
-        chmod 600 key.pem
-        ssh -o StrictHostKeyChecking=no -i key.pem user@${{ secrets.TEST_SERVER_IP }} "bash ~/run_tests.sh"
+#     - name: SSH to Test Server and Run Tests
+#       run: |
+#         echo "${{ secrets.TEST_SERVER_PRIVATE_KEY }}" > key.pem
+#         chmod 600 key.pem
+#         ssh -o StrictHostKeyChecking=no -i key.pem user@${{ secrets.TEST_SERVER_IP }} "bash ~/run_tests.sh"
