@@ -7,9 +7,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.pointer_input import PointerInput
-from import_report import generate_html_report
-from import_screenshot import save_screenshot
-from import_applitools import eyes_open, eyes_check, eyes_close, eyes_abort_if_not_closed
+from import_function.import_report import generate_html_report
+from import_function.import_screenshot import save_screenshot
+from import_function.import_applitools import eyes_open, eyes_check, eyes_close, eyes_abort_if_not_closed
 
 
 desired_caps = {
