@@ -9,6 +9,8 @@ from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.pointer_input import PointerInput
 from import_report import generate_html_report
 from import_screenshot import save_screenshot
+from import_applitools import eyes_open, eyes_check, eyes_close, eyes_abort_if_not_closed
+
 
 desired_caps = {
     "platformName": "Android",
@@ -25,6 +27,8 @@ options = UiAutomator2Options().load_capabilities(desired_caps)
 # driver 실행
 driver = webdriver.Remote("http://localhost:4723", options=options)
 time.sleep(5)
+
+
 
 # 실행 권한
 driver.find_element("xpath", '//android.view.ViewGroup/android.view.View/android.view.View/android.view.View/android.view.View[2]').click()

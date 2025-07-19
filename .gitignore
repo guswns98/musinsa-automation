@@ -1,9 +1,7 @@
-# Python 캐시
 __pycache__/
 *.pyc
-# 자동화 결과 스크린샷 폴더
 screenshots_*/
 screenshots/
 *.png
-# 실행 결과 로그
 *.log
+.env
