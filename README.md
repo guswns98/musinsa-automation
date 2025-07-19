@@ -14,8 +14,8 @@ Python과 Appium을 사용하여 musinsa APP 주요 기능들을 자동화한 QA
 - project/
 - ├── screenshots/ # 자동화 저장 스크린샷
 - ├── musinsa.py # 테스트 스크립트
-- ├── report.html # 리포트 모듈
-- ├── report.html # 스크린샷 모듈
+- ├── import_screenshot.py # 스크린샷 모듈
+- ├── import_report.py # 리포트 모듈
 - ├── report.html # HTML 테스트 결과 리포트
 - └── README.md # 설명 파일
 

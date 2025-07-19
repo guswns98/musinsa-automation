@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.pointer_input import PointerInput
-from report import generate_html_report
+from import_report import generate_html_report
 from import_screenshot import save_screenshot
 
 desired_caps = {
