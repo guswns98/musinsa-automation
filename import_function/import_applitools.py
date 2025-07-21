@@ -7,6 +7,8 @@ load_dotenv
 # Eyes 객체는 외부에서도 쓸 수 있도록 전역 유지
 eyes = Eyes()
 eyes.api_key = os.getenv('API_KEY')
+# if not eyes.api_key:
+#     raise ValueError("api 키가 설정되어 있지 않음")
 
 def eyes_open(driver, app_name="Musinsa App", test_name="Default Test"):
     eyes.open(driver, app_name, test_name)

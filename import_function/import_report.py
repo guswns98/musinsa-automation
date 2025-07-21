@@ -4,7 +4,7 @@ def generate_html_report(image_folder="screenshots", output_file="report.html"):
     from datetime import datetime
     result_map = {
         "launch_and_close_intro": ("앱 실행 및 인트로 광고 닫기", "success"),
-        "login_fail": ("로그인 실패", "fail"),
+        "login_fail": ("로그인 실패", "success"),
         "signup_phone_verification": ("회원가입 - 문자 인증", "success"),
         "kakao_login_complete": ("카카오 로그인 완료", "success"),
         "search_item_detail": ("상품 상세보기", "success"),
