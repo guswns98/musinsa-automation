@@ -35,8 +35,16 @@ jobs:
         run: |
           yes | sdkmanager --sdk_root=$HOME/android-sdk "platform-tools" "platforms;android-33"
 
-      # - name: Install Python dependencies
-      #   run: pip install -r requirements.txt
+      - name:  Install emulator tools
+        run: |
+          yes | sdkmanager --sdk_root=$HOME/android-sdk "emulator" "system-images;android-33;google_apis;x86_64"
+      - name:  Create & start emulator
+        run: |
+          echo "no" | avdmanager create avd -n test-emulator -k "system-images;android-33;google_apis;x86_64" --device "pixel"
+          $HOME/android-sdk/emulator/emulator -avd test-emulator -no-audio -no-window -gpu off -no-snapshot > emulator.log 2>&1 &
+          sleep 30  
+      - name:  Confirm emulator connection
+        run: adb devices
 
       - name: Install Appium and UiAutomator2 driver
         run: |
@@ -46,7 +54,7 @@ jobs:
       - name: Start Appium Server
         run: |
           appium --base-path /wd/hub &
-          sleep 5  # 서버 대기
+          sleep 5 
 
       - name: Run automation
         run: python musinsa.py
