@@ -9,7 +9,7 @@ from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.pointer_input import PointerInput
 from import_function.import_report import generate_html_report
 from import_function.import_screenshot import save_screenshot
-from import_function.import_applitools import eyes_open, eyes_check, eyes_close, eyes_abort_if_not_closed
+from import_function.import_applitools import eyes_open, eyes_check, eyes_close
 
 
 desired_caps = {
@@ -19,7 +19,6 @@ desired_caps = {
     "appium:appActivity": "com.musinsa.store.scenes.deeplink.DeepLinkActivity",
     "appium:automationName": "UiAutomator2"
 }
-
 
 options = UiAutomator2Options().load_capabilities(desired_caps)
 
@@ -42,6 +41,10 @@ intro_popup = WebDriverWait(driver, 10).until(
 
 intro_popup.click()
 save_screenshot(driver, "launch_and_close_intro")
+
+# eyes_open(driver, test_name="앱 실행 시 메인 화면")
+# eyes_check("런칭 후 메인", driver)
+# eyes_close()
 
 
 # 로그인 실패
@@ -74,6 +77,9 @@ save_screenshot(driver, "login_fail")
 driver.find_element("id", 'android:id/button1').click()
 time.sleep(3)
 
+# eyes_open(driver, test_name="로그인 실패 시나리오")
+# eyes_check("로그인 실패 경고", driver)
+# eyes_close()
 
 
 # 회원 가입
@@ -120,6 +126,9 @@ close.click()
 time.sleep(5)
 save_screenshot(driver, "kakao_login_complete")
 
+# eyes_open(driver, test_name="카카오 로그인 성공")
+# eyes_check("카카오 로그인 완료 화면", driver)
+# eyes_close()
 
 
 # 검색/리스트 스크롤
@@ -156,6 +165,11 @@ item.click()
 time.sleep(2)
 save_screenshot(driver, "search_item_detail")
 
+# eyes_open(driver, test_name="상품 검색 후 상세 진입")
+# eyes_check("상품 상세 화면", driver)
+# eyes_close()
+
+
 like_button = WebDriverWait(driver, 10).until(
     EC.element_to_be_clickable((By.XPATH, '//android.widget.Button[@text="좋아요 버튼"]'))
 )
@@ -174,6 +188,11 @@ like = WebDriverWait(driver, 10).until(
 like.click()
 time.sleep(3)
 save_screenshot(driver, "favorites_view")
+
+# eyes_open(driver, test_name="즐겨찾기 화면")
+# eyes_check("좋아요 누른 상품들", driver)
+# eyes_close()
+
 
 
 # 로그아웃
@@ -217,6 +236,11 @@ def tap_by_coordinates(driver, x, y):
     actions.perform()
 
 tap_by_coordinates(driver, 800, 2560)
+
+# eyes_open(driver, test_name="로그아웃 이전 설정 화면")
+# eyes_check("설정 화면", driver)
+# eyes_close()
+
 
 okay_button = WebDriverWait(driver, 10).until(
     EC.element_to_be_clickable((By.XPATH, '//android.view.ViewGroup/android.view.View/android.view.View/android.view.View/android.view.View[2]'))

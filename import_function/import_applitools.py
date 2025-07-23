@@ -2,7 +2,7 @@ from applitools.selenium import Eyes, Target
 import os
 from dotenv import load_dotenv
 
-load_dotenv
+load_dotenv()
 
 # Eyes 객체는 외부에서도 쓸 수 있도록 전역 유지
 eyes = Eyes()
