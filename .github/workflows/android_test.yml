@@ -20,6 +20,10 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
 
+    - name: Start Appium Server
+      run:  npm install -g appium
+            appium --base-path /wd/hub &  
+
     - name: Run automation
       run: python musinsa.py
 
