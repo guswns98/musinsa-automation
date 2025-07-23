@@ -17,6 +17,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Set ANDROID_HOME
+        run: echo "ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
+
       - name: Install Python dependencies
         run: pip install -r requirements.txt
 
@@ -32,6 +35,7 @@ jobs:
 
       - name: Run automation
         run: python musinsa.py
+
 
 
 # on: [push]
