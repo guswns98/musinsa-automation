@@ -1,7 +1,7 @@
 
-eyes-common          6.3.1
-eyes-selenium        6.2.2
-pytest               8.4.1
-python-dotenv        1.1.1
-selenium             4.34.1
-urllib3              2.5.0 # http 통신 applitools
+eyes-common==6.3.1
+eyes-selenium==6.2.2
+pytest==8.4.1
+python-dotenv==1.1.1
+selenium==4.34.1
+urllib3==2.5.0 # http 통신 applitools
