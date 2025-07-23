@@ -250,3 +250,4 @@ save_screenshot(driver, "logout_complete")
 
 generate_html_report()
 
+# adb 
