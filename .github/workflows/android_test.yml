@@ -42,18 +42,33 @@ jobs:
       - name: Create & start emulator
         run: |
           echo "no" | avdmanager create avd -n test-emulator \
-            -k "system-images;android-33;google_apis;x86_64" \
-            --device "pixel"
-          nohup $HOME/android-sdk/emulator/emulator \
-            -avd test-emulator \
-            -no-window -gpu off -no-snapshot \
-            > emulator.log 2>&1 &
+            -k "system-images;android-33;google_apis;x86_64" --device "pixel"
+
+          nohup $HOME/android-sdk/emulator/emulator -avd test-emulator \
+            -no-audio -no-boot-anim -no-window -gpu swiftshader_indirect -no-snapshot \
+            > /dev/null 2>&1 &
 
       - name: Wait for emulator to boot
         run: |
-          adb wait-for-device
-          adb shell 'while [[ `getprop sys.boot_completed` != "1" ]]; do sleep 1; done;'
-      - run: adb devices
+          echo "Waiting for emulator to start..."
+          $HOME/android-sdk/platform-tools/adb wait-for-device
+
+          boot_completed=""
+          retries=60
+          until [[ "$boot_completed" == "1" || $retries -le 0 ]]; do
+            boot_completed=$($HOME/android-sdk/platform-tools/adb shell getprop sys.boot_completed | tr -d '\r')
+            echo "Boot status: $boot_completed"
+            sleep 5
+            retries=$((retries - 1))
+          done
+
+          if [[ "$boot_completed" != "1" ]]; then
+            echo "Emulator failed to boot."
+            cat emulator.log || true
+            exit 1
+          fi
+
+          $HOME/android-sdk/platform-tools/adb shell input keyevent 82
 
 
       - name: Install Appium and UiAutomator2 driver
