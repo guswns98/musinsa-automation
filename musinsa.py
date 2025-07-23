@@ -24,7 +24,7 @@ options = UiAutomator2Options().load_capabilities(desired_caps)
 
 
 # driver 실행
-driver = webdriver.Remote("http://localhost:4723", options=options)
+driver = webdriver.Remote("http://localhost:4723/wd/hub", options=options)
 time.sleep(5)
 
 
