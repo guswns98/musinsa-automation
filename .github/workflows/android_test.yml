@@ -5,43 +5,42 @@ on:
   push:
     branches: [master]  # 또는 main
 
-on:
-  push:
-    branches: [master]
-
 jobs:
   run-script:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with: python-version:'3.12'
-      - run: pip install -r requirements.txt
+      - name: Checkout source
+        uses: actions/checkout@v3
 
-      # Android SDK 설치
-      - run: |
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install Android SDK
+        run: |
           sudo apt-get update
           sudo apt-get install -y wget unzip
           wget https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip -O cmdline-tools.zip
           unzip cmdline-tools.zip
           mkdir -p $HOME/android-sdk/cmdline-tools
           mv cmdline-tools $HOME/android-sdk/cmdline-tools/latest
-        shell: bash
-      - name: Configure ANDROID_HOME and PATH
-        run: |
           echo "ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
           echo "$HOME/android-sdk/cmdline-tools/latest/bin" >> $GITHUB_PATH
           echo "$HOME/android-sdk/platform-tools" >> $GITHUB_PATH
 
-      # 필수 패키지 설치
-      - run: |
+      - name: Install SDK packages
+        run: |
           yes | sdkmanager --sdk_root=$HOME/android-sdk "platform-tools" "platforms;android-33"
-      - run: |
-          yes | sdkmanager --sdk_root=$HOME/android-sdk \
-            "emulator" \
-            "system-images;android-33;google_apis;x86_64"
 
-      # 에뮬레이터 생성 및 실행
+      - name:  Install emulator tools
+        run: |
+          yes | sdkmanager --sdk_root=$HOME/android-sdk "emulator" "system-images;android-33;google_apis;x86_64"
+
+
+      - name:  Create & start emulator
       - run: |
           echo "no" | avdmanager create avd -n test-emulator \
             -k "system-images;android-33;google_apis;x86_64" \
@@ -56,22 +55,19 @@ jobs:
           adb shell 'while [[ `getprop sys.boot_completed` != "1" ]]; do sleep 1; done;'
       - run: adb devices
 
-      # Appium 설치 및 실행
-      - run: |
+
+      - name: Install Appium and UiAutomator2 driver
+        run: |
           npm install -g appium
           appium driver install uiautomator2
-      - run: |
-          nohup appium --base-path /wd/hub > appium.log 2>&1 &
-          sleep 5
 
-      # 테스트 실행
-      - run: python musinsa.py
+      - name: Start Appium Server
+        run: |
+          appium --base-path /wd/hub &
+          sleep 5 
 
-      # 로그 출력
-      - run: |
-          echo "=== Appium Server Log ==="
-          cat appium.log
-          echo "=== Emulator Log ==="
-          cat emulator.log
+      - name: Run automation
+        run: python musinsa.py
+
 
 
