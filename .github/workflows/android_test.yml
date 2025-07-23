@@ -24,8 +24,6 @@ jobs:
       run: python musinsa.py
 
 
-      name: Run Appium Tests on Real Device
-
 # on: [push]
 
 # jobs:
