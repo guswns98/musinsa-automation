@@ -39,9 +39,8 @@ jobs:
         run: |
           yes | sdkmanager --sdk_root=$HOME/android-sdk "emulator" "system-images;android-33;google_apis;x86_64"
 
-
-      - name:  Create & start emulator
-      - run: |
+      - name: Create & start emulator
+        run: |
           echo "no" | avdmanager create avd -n test-emulator \
             -k "system-images;android-33;google_apis;x86_64" \
             --device "pixel"
@@ -49,6 +48,7 @@ jobs:
             -avd test-emulator \
             -no-window -gpu off -no-snapshot \
             > emulator.log 2>&1 &
+
       - name: Wait for emulator to boot
         run: |
           adb wait-for-device
