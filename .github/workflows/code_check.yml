@@ -1,0 +1,33 @@
+name: Code Quality Check
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install flake8
+
+      - name: Syntax check
+        run: python -m py_compile pages/*.py utils/*.py tests/*.py
+
+      - name: Lint (flake8)
+        run: flake8 pages/ utils/ tests/ --max-line-length=150 --ignore=E501,W503,E402
+
+      - name: Collect tests
+        run: pytest --collect-only tests/
