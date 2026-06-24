@@ -1,4 +1,3 @@
-from selenium.webdriver.common.by import By
 from appium.webdriver.common.appiumby import AppiumBy
 from pages.base_page import BasePage
 

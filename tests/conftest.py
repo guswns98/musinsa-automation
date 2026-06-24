@@ -213,7 +213,7 @@ def pytest_runtest_makereport(item, call):
                 if "; For documentation on this error" in error_msg:
                     error_msg = error_msg.split("; For documentation on this error")[0]
                 if not is_app_running():
-                    message += f"\n앱 크래시 감지 (프로세스 종료됨)"
+                    message += "\n앱 크래시 감지 (프로세스 종료됨)"
                     if not hasattr(item.config, '_crash_detected'):
                         item.config._crash_detected = []
                     item.config._crash_detected.append(item.name)
@@ -236,7 +236,7 @@ def pytest_runtest_makereport(item, call):
 
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
     """pytest-html이 리포트 쓰기를 완전히 마친 후 Slack으로 결과 전송"""
-    global _session_start_time
+    global _session_start_time  # noqa: F824
 
     try:
         webhook_url = config.getoption("slack_webhook", default=None)

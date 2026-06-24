@@ -16,7 +16,6 @@ import time
 import pytest
 from appium import webdriver
 from appium.options.android import UiAutomator2Options
-from selenium.webdriver.common.by import By
 from pages.home_page import HomePage
 from pages.my_page import MyPage
 

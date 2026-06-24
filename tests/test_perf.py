@@ -11,7 +11,6 @@ import os
 import pytest
 from appium import webdriver
 from appium.options.android import UiAutomator2Options
-from selenium.webdriver.common.by import By
 from utils.performance_utils import get_performance_snapshot
 
 APP_PACKAGE = "com.musinsa.store"
@@ -83,7 +82,7 @@ def test_cold_start_time(driver, request):
         time.sleep(1)
         elapsed = _launch_app_and_measure()
         results.append(elapsed)
-        print(f"[콜드 스타트 #{i+1}] {elapsed}초")
+        print(f"[콜드 스타트 #{i + 1}] {elapsed}초")
         time.sleep(3)
 
     avg = round(sum(results) / len(results), 2)
@@ -110,7 +109,7 @@ def test_warm_start_time(driver, request):
         time.sleep(3)
         elapsed = round(time.time() - start, 2)
         results.append(elapsed)
-        print(f"[웜 스타트 #{i+1}] {elapsed}초")
+        print(f"[웜 스타트 #{i + 1}] {elapsed}초")
 
     avg = round(sum(results) / len(results), 2)
     print(f"[웜 스타트 평균] {avg}초")

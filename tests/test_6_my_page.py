@@ -1,4 +1,3 @@
-import pytest
 from pages.my_page import MyPage
 
 

@@ -1,4 +1,3 @@
-import pytest
 from pages.permission_page import PermissionPage
 from pages.home_page import HomePage
 from pages.login_page import LoginPage
