@@ -1,7 +1,8 @@
 __pycache__/
 *.pyc
-screenshots_*/
 screenshots/
+reports/
 *.png
 *.log
 .env
+venv/
